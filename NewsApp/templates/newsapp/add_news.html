@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить новость</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'newsapp/css/add_news.css' %}">
+</head>
+<body>
+    <aside>
+        <nav>
+            <ul>
+                <header>
+                    <h1>Supervision system</h1>
+                </header>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="#">Lists</a></li>
+                <li><a href="#">Analytics</a></li>
+                <li><a href="{% url 'account' %}">Account</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <main>
+        <section class="add-news">
+            <h2>Добавить новость</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Добавить новость</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

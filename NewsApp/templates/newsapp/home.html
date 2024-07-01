@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supervision system</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'newsapp/css/home.css' %}">
+</head>
+<body>
+    <aside>
+        <nav>
+            <ul>
+                <header>
+                    <h1>Supervision system</h1>
+                </header>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="#">Lists</a></li>
+                <li><a href="#">Analytics</a></li>
+                <li><a href="{% url 'account' %}">Account</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <main>
+        <section class="search">
+            <form action="#">
+                <input type="text" id="search-input" name="search" placeholder="Введите запрос">
+                <button type="submit">Найти</button>
+            </form>
+        </section>
+        <section class="news">
+            <h2>Новости</h2>
+            <a href="{% url 'add_news' %}">Добавить новость</a>
+            {% for news in news_list %}
+            <article class="news-item">
+                <h3>{{ news.title }}</h3>
+                <p>{{ news.intro }}</p>
+                <div class="status">
+                    <label for="status-select-{{ forloop.counter }}">Статус:</label>
+                    <select id="status-select-{{ forloop.counter }}" disabled>
+                        <option value="good" {% if news.status == 'good' %}selected{% endif %}>хорошая</option>
+                        <option value="needs_review" {% if news.status == 'needs_review' %}selected{% endif %}>требует проверки</option>
+                        <option value="bad" {% if news.status == 'bad' %}selected{% endif %}>плохая</option>
+                    </select>
+                </div>
+                <div class="status">
+                    <label>Статус ИИ:</label>
+                    <select disabled>
+                        <option value="good" {% if news.ai_status == 'good' %}selected{% endif %}>хорошая</option>
+                        <option value="needs_review" {% if news.ai_status == 'needs_review' %}selected{% endif %}>требует проверки</option>
+                        <option value="bad" {% if news.ai_status == 'bad' %}selected{% endif %}>плохая</option>
+                    </select>
+                </div>
+                <div class="sources">
+                    <p>Источник и первоисточник:</p>
+                    <a href="{{ news.source_link }}">Ссылка на источник</a>
+                </div>
+            </article>
+            {% endfor %}
+        </section>
+    </main>
+</body>
+</html>
