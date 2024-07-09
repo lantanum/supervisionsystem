@@ -1,0 +1,14 @@
+{% extends 'newsapp/base.html' %}
+
+{% block title %}Добавить менеджера{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h2>Добавить менеджера</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="content__button">Сохранить</button>
+    </form>
+</div>
+{% endblock %}

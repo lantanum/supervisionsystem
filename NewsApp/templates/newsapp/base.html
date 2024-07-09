@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'newsapp/css/style.css' %}">
+    <title>{% block title %}Document{% endblock %}</title>
+</head>
+<body>
+    <section class="home">
+        <aside class="home__aside">
+            <ul class="list">
+                <a href="#" class="list__title">Supervision System</a>
+                <li class="list__item"><a href="{% url 'home' %}">Home</a></li>
+                <li class="list__item"><a href="{% url 'lists' %}">Lists</a></li>
+                <li class="list__item"><a href="{% url 'analytics' %}">Analytics</a></li>
+                <li class="list__item"><a href="{% url 'account' %}">Account</a></li>
+            </ul>
+        </aside>
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+    </section>
+    <script src="https://kit.fontawesome.com/962c6acd8f.js" crossorigin="anonymous"></script>
+</body>
+</html>
