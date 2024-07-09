@@ -1,5 +1,11 @@
+import json
+
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+
 from .models import News, Profile
 from .forms import NewsForm, ManagerRegistrationForm, UserEditForm, ProfileEditForm, SearchForm
 
@@ -64,3 +70,21 @@ def add_manager(request):
     else:
         form = ManagerRegistrationForm()
     return render(request, 'newsapp/add_manager.html', {'form': form})
+
+@login_required
+@csrf_exempt
+def change_news_status(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            news_id = data.get('news_id')
+            status = data.get('status')
+            news = News.objects.get(id=news_id)
+            news.status = status
+            news.save()
+            return JsonResponse({'success': True})
+        except News.DoesNotExist:
+            return JsonResponse({'success': False, 'message': 'Новость не найдена.'}, status=404)
+        except json.JSONDecodeError:
+            return JsonResponse({'success': False, 'message': 'Ошибка декодирования JSON.'}, status=400)
+    return JsonResponse({'success': False, 'message': 'Неправильный метод запроса.'}, status=400)

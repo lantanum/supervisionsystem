@@ -18,7 +18,7 @@
 </div>
 <div class="content__inner">
     {% for news in news_list %}
-    <div class="content__item">
+    <div class="content__item" data-news-id="{{ news.id }}">
         <div class="content__uptitle">
             <p>Источник: <a href="{{ news.source_link }}">{{ news.source_link }}</a></p>
         </div>
@@ -27,7 +27,13 @@
             <p>{{ news.intro }}</p>
         </div>
         <div class="content__subtitle">
-            <p>Статус: <span>{{ news.get_status_display }}</span></p>
+            <p>Статус:
+                <select class="news-status-select" data-news-id="{{ news.id }}">
+                    <option value="needs_review" {% if news.status == 'needs_review' %}selected{% endif %}>Требует проверки</option>
+                    <option value="good" {% if news.status == 'good' %}selected{% endif %}>Хорошая</option>
+                    <option value="bad" {% if news.status == 'bad' %}selected{% endif %}>Плохая</option>
+                </select>
+            </p>
             <p>Тональность ИИ: <span>{{ news.get_ai_status_display }}</span></p>
         </div>
     </div>
@@ -35,4 +41,40 @@
     <p>Новости не найдены.</p>
     {% endfor %}
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const selects = document.querySelectorAll('.news-status-select');
+
+    selects.forEach(select => {
+        select.addEventListener('change', function () {
+            const newsId = this.getAttribute('data-news-id');
+            const status = this.value;
+
+            fetch('{% url "change_news_status" %}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({
+                    news_id: newsId,
+                    status: status
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Статус успешно обновлен.');
+                } else {
+                    alert('Ошибка при обновлении статуса.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Произошла ошибка при обновлении статуса.');
+            });
+        });
+    });
+});
+</script>
 {% endblock %}

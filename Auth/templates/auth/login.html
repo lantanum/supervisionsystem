@@ -1,10 +1,25 @@
-{% extends 'base.html' %}
-
-{% block content %}
-  <h2>Login</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-  </form>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+    <link rel="stylesheet" href="{% static 'newsapp/style.css' %}">
+    <script src="https://kit.fontawesome.com/962c6acd8f.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="auth">
+        <div class="auth__container">
+            <h1 class="auth__title">Login in</h1>
+            <p class="auth__subtitle">Enter your email to sign up for this app</p>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.username }}
+                {{ form.password }}
+                <button type="submit" class="auth__button">Sign up with email</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

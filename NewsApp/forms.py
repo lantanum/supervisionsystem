@@ -70,3 +70,9 @@ class ProfileEditForm(forms.ModelForm):
 
 class SearchForm(forms.Form):
     query = forms.CharField(max_length=255, required=False, label='Поиск')
+
+
+class NewsStatusForm(forms.ModelForm):
+    class Meta:
+        model = News
+        fields = ['status']

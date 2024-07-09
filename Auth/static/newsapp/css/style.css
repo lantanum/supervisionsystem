@@ -1,0 +1,304 @@
+@import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "inter";
+}
+
+.input {
+    width: 400px;
+    height: 40px;
+    border: 1px solid rgb(236, 236, 236);
+    border-radius: 7px;
+    padding: 0 10px;
+}
+
+.input-margin {
+    margin-bottom: 16px;
+}
+
+.auth {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+}
+
+.auth__title {
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+.auth__subtitle {
+    font-size: 16px;
+    margin-bottom: 24px;
+}
+
+
+
+.auth__button {
+    width: 100%;
+    height: 40px;
+    background-color: black;
+    color: white;
+    border-radius: 7px;
+    border: 0;
+    font-size: 16px;
+}
+
+/* HOME */
+
+.home {
+    display: flex;
+    height: 120vh;
+}
+
+.home__aside {
+    width: 22vw;
+    height: 100%;
+    border-right: 2px solid rgb(236, 236, 236);
+}
+
+.list {
+    padding: 0 24px;
+    list-style: none;
+}
+
+.list__title {
+    display: inline-block;
+    margin: 24px 0;
+    font-size: 30px;
+    color: black;
+    text-decoration: none;
+}
+
+
+.list__item a{
+    color: black;
+    text-decoration: none;
+    font-size: 24px;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.content {
+    padding: 76px 64px;
+    width: 100%;
+}
+
+.content__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content__button {
+    background-color: white;
+    border: 1px solid rgb(236, 236, 236);
+    border-radius: 7px;
+    height: 40px;
+    width: 80px;
+    margin-left: 16px;
+}
+
+
+.content__top-left {
+    background-color: rgb(214, 229, 252);
+    border-radius: 7px;
+    padding: 2px;
+}
+
+.content__button--small {
+    background-color: rgb(214, 229, 252);
+    border: 1px solid transparent;
+    border-radius: 7px;
+    height: 40px;
+    width: 40px;
+}
+
+.content__button--small-active {
+    background-color: white;
+    border: 1px solid rgb(236, 236, 236);
+}
+
+.content__inner {
+    padding-top: 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.content__item {
+    width: 100%;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid rgb(236, 236, 236);
+    border-radius: 7px;
+    padding: 16px 42px;
+
+}
+
+.table {
+    padding: 60px;
+
+}
+
+.table__top {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 14px;;
+}
+
+.table-right, .table-left {
+    display: flex;
+    width: 15%;
+    gap: 30px;
+}
+
+.table-right h3 {
+    font-size: 16px;
+}
+
+.table__item {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid rgb(236, 236, 236);
+}
+
+.table__item-left {
+    display: flex;
+    gap: 30px
+}
+
+.table__item-left-num {
+    display: inline-block;
+    width: 40px;
+    font-size: 16px;
+}
+
+.table__item-left-name {
+    font-size: 16px;
+}
+
+.table__item-right {
+    width: 15%;
+    display: flex;
+    gap: 30px;
+}
+
+.table__item-right button {
+    font-size: 14px;
+    display: inline-block;
+    padding: 5px;
+    background-color: white;
+    border:1px solid rgb(236, 236, 236);
+    border-radius: 7px;
+}
+
+.profile {
+    padding: 72px 170px;
+    width: 620px;
+}
+
+.profile__title {
+    margin-bottom: 40px;
+}
+
+.profile__item {
+    display: flex;
+    align-items: center;
+    width: 250px;
+    justify-content: space-between;
+}
+
+.profile__input {
+    margin: 32px 0;
+}
+
+.profile__input input {
+    width: 40vw;
+    height: 40px;
+    border: 1px solid rgb(236, 236, 236);
+    border-radius: 7px;
+}
+
+.profile__lists {
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+    gap: 10px;
+
+}
+
+.profile__lists button {
+    height: 40px;
+    background-color: white;
+    border: 1px solid rgb(236, 236, 236);
+}
+
+.profile__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile__button {
+    background-color: black;
+    color: white;
+    height: 40px;
+    border: none;
+}
+
+.profile__button:first-child {
+    background-color: white;
+    color: gray;
+}
+
+.stats {
+    width: 100%;
+    padding: 30px 120px;
+}
+
+.stats__top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.stats__top-item {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items:flex-start;
+    width: 32%;
+    height: 130px;
+    padding: 25px;
+    border: 1px solid rgb(236, 236, 236);
+    border-radius: 20px;
+}
+
+.stat__component {
+    display: flex;
+    gap: 50px;
+    margin-bottom: 40px;
+}
+
+.stat__comp-users {
+    padding: 20px;
+}
