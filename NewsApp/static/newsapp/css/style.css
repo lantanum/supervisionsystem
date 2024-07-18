@@ -302,3 +302,34 @@ body {
 .stat__comp-users {
     padding: 20px;
 }
+
+.news-status-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 8px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.news-status-select option {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Дополнительные стили при наведении */
+.news-status-select:hover {
+    border-color: #999;
+}
+
+/* Дополнительные стили при фокусе */
+.news-status-select:focus {
+    outline: none;
+    border-color: #666;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+

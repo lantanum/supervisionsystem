@@ -1,0 +1,12 @@
+{% extends 'newsapp/base.html' %}
+
+{% block title %}Create Bank{% endblock %}
+
+{% block content %}
+    <h2>Create New Bank</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button">Create</button>
+    </form>
+{% endblock %}

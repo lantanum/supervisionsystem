@@ -5,3 +5,5 @@ class NewsappConfig(AppConfig):
 
     def ready(self):
         import NewsApp.signals
+        from .scheduler import start
+        start()

@@ -72,5 +72,19 @@ def fetch_news():
         # Обновление параметров запроса для следующей страницы
         params['pn'] += 1
 
+def update_news_ai_status():
+    news_items = News.objects.filter(status='needs_review')
+    form = NewsForm()
+
+    for news_item in news_items:
+        try:
+            ai_status = form.get_ai_status(news_item.intro)
+            news_item.ai_status = ai_status
+            news_item.save()
+            print(f'Successfully updated AI status for news: {news_item.title}')
+        except Exception as e:
+            print(f'Error updating AI status for news: {news_item.title} - {e}')
+
 if __name__ == "__main__":
     fetch_news()
+    update_news_ai_status()

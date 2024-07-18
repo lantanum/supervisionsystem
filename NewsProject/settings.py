@@ -40,9 +40,6 @@ INSTALLED_APPS = [
     'Auth',
     'NewsApp',
 ]
-CRONJOBS = [
-    ('*/5 * * * *', 'NewsApp.cron.my_scheduled_job')
-]
 
 
 MIDDLEWARE = [

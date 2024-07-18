@@ -2,7 +2,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from .models import News, Profile
+from .models import News, Profile, Bank, Manager
 import requests
 
 class NewsForm(forms.ModelForm):
@@ -21,7 +21,7 @@ class NewsForm(forms.ModelForm):
     def get_ai_status(self, intro):
         url = "https://api.textcortex.com/v1/texts/completions"
         headers = {
-            "Authorization": "Bearer gAAAAABmgwkdm-ZC21HMwnUZyR5CJjVXKisxVeFBxLIxAJwJjCCKMCLBot0hS-PBv4xyv0r8gABxFrf0QZJQ2jbkL70ikDtN9WOztvqsyOW9QKGFIElZgoI6oIHzXbRmXdGPP76-Gc1-",
+            "Authorization": "Bearer gAAAAABmmVXaqnu4t9AkjgGKghEOZQMInu5iaA6vqioGy9nWZwu_oIQHbreGPIP-GvyHmmPAQHA5Xom_ox8Wgu8jxTcRLqKjagZ9nL_AfQzdV6BAh5HT3DEzw0I6nF0P2Y4-SgjWpCji",
             "Content-Type": "application/json"
         }
         data = {
@@ -55,6 +55,7 @@ class ManagerRegistrationForm(forms.ModelForm):
         user.is_staff = True  # Сделать пользователя менеджером
         if commit:
             user.save()
+            Manager.objects.create(user=user)
         return user
 
 
@@ -76,3 +77,55 @@ class NewsStatusForm(forms.ModelForm):
     class Meta:
         model = News
         fields = ['status']
+
+class BankCreationForm(forms.ModelForm):
+    manager = forms.ModelChoiceField(
+        queryset=Manager.objects.all(),
+        required=False,
+        label='Manager',
+        widget=forms.Select()
+    )
+
+    class Meta:
+        model = Bank
+        fields = ['name', 'ceo', 'manager']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['manager'].queryset = Manager.objects.all().select_related('user')
+        self.fields['manager'].label_from_instance = lambda obj: f"{obj.user.last_name} {obj.user.first_name}"
+
+
+class BankManagerForm(forms.ModelForm):
+    manager = forms.ModelChoiceField(
+        queryset=Manager.objects.all(),
+        required=False,
+        label='Manager',
+        widget=forms.Select()
+    )
+
+    class Meta:
+        model = Bank
+        fields = ['manager']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['manager'].queryset = Manager.objects.all().select_related('user')
+        self.fields['manager'].label_from_instance = lambda obj: f"{obj.user.last_name} {obj.user.first_name}"
+
+
+class ManageBanksForm(forms.ModelForm):
+    banks = forms.ModelMultipleChoiceField(
+        queryset=Bank.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False,
+        label="Banks"
+    )
+
+    class Meta:
+        model = Manager
+        fields = ['banks']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['banks'].label_from_instance = lambda obj: obj.name

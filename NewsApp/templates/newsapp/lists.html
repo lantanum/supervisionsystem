@@ -3,7 +3,6 @@
 {% block title %}Списки{% endblock %}
 
 {% block content %}
-<div class="content">
     <div class="content__top">
         <div class="content__top-right">
             <input type="text" class="input" placeholder="Search">
@@ -26,23 +25,28 @@
                 <h3>CEO</h3>
             </div>
         </div>
+        {% for bank in banks %}
         <div class="table__item">
             <div class="table__item-left">
-                <p class="table__item-left-num">12</p>
-                <h4 class="table__item-left-name">Bank RBK</h4>
+                <p class="table__item-left-num">{{ forloop.counter }}</p>
+                <h4 class="table__item-left-name">{{ bank.name }}</h4>
             </div>
             <div class="table__item-right">
-                <button>Manager</button>
-                <button>Фио</button>
-                <button><i class="fa-solid fa-ellipsis"></i></button>
+                {% if bank.manager %}
+                    <p>{{ bank.manager.user.last_name }} {{ bank.manager.user.first_name }}</p>
+                {% else %}
+                    <p>No Manager</p>
+                {% endif %}
+                <p>{{ bank.ceo }}</p>
+                <a href="{% url 'update_bank_manager' bank.id %}" class="button">Edit Manager</a>
             </div>
         </div>
-        <!-- Другие элементы таблицы -->
+        {% endfor %}
     </div>
     {% if user.is_superuser %}
     <div class="content__bottom">
-        <a href="{% url 'add_manager' %}" class="content__button">Добавить менеджера</a>
+        <a href="{% url 'add_manager' %}" class="content__button content__button--black">Добавить менеджера</a>
+        <a href="{% url 'create_bank' %}" class="content__button content__button--black">Создать банк</a>
     </div>
     {% endif %}
-</div>
 {% endblock %}

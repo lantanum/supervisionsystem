@@ -1,0 +1,12 @@
+{% extends 'newsapp/base.html' %}
+
+{% block title %}Update Bank Manager{% endblock %}
+
+{% block content %}
+    <h2>Update Manager for {{ bank.name }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button">Save</button>
+    </form>
+{% endblock %}
